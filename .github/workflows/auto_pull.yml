@@ -25,6 +25,6 @@ jobs:
       - name: Deploy to VPS
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} << 'EOF'
-          cd /path/to/project
+          cd /www/wwwroot/website
           git pull origin main
           EOF
