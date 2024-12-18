@@ -8,21 +8,23 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
+      - name: Test SSH Connection
+        run: |
+          ssh -vv -o StrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} "echo 'SSH Connection Successful'"
+      
       - name: Deploy to VPS
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} << 'EOF'
-          cd /path/to/your/project
-          git fetch origin main
-          git reset --hard origin/main
-          # Thêm các lệnh deploy bổ sung như restart service, chạy migrations, v.v.
+          cd /path/to/project
+          git pull origin main
           EOF
