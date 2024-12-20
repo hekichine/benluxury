@@ -867,6 +867,13 @@ picture {
   -webkit-animation: comingsoon 20s linear infinite forwards;
   animation: comingsoon 20s linear infinite forwards;
 }
+[filter-tabs] button.coming-soon2::before {
+  background: -o-linear-gradient(358.23deg, #13fe3e 4.77%, #f31d88 16.98%, #9417e3 30.33%, #d3b806 50%, #f404a4 70%, #fafafa 90%, #00eaff 100%);
+  background: linear-gradient(91.77deg, #13fe3e 4.77%, #f31d88 16.98%, #9417e3 30.33%, #d3b806 50%, #f404a4 70%, #fafafa 90%, #00eaff 100%);
+  background-size: 400% 400%;
+  -webkit-animation: comingsoon 20s linear infinite forwards;
+  animation: comingsoon 20s linear infinite forwards;
+}
 
 @-webkit-keyframes text_circle {
   0% {
@@ -2028,6 +2035,47 @@ cursor {
   }
 }
 
+
+/* 
+  ======================
+  TOP LEVEL 
+  ======================
+*/
+.level{
+  background-size: auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-position: center;
+}
+.level[level="2"]{
+  background-image: url('./assets/level/2.gif')
+}
+.level[level="3"]{
+  background-image: url('./assets/level/3.gif')
+}
+.level[level="4"]{
+  background-image: url('./assets/level/4.gif')
+}
+.level[level="5"]{
+  background-image: url('./assets/level/5.gif')
+}
+.level[level="6"]{
+  background-image: url('./assets/level/6.gif')
+}
+.level[level="7"]{
+  background-image: url('./assets/level/7.gif')
+}
+.level[level="8"]{
+  background-image: url('./assets/level/8.gif')
+}
+.level[level="9"]{
+  background-image: url('./assets/level/9.gif')
+}
+/* 
+  ======================
+  END TOP LEVEL 
+  ======================
+*/
 /* 
   ======================
   MARQUEE 
