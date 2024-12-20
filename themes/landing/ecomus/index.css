@@ -1020,6 +1020,41 @@ header {
   transition-delay: 0.3s;
 }
 
+.demos .is_active .col-inner::after {
+  background: -o-linear-gradient(left, #ff9c8d 10%, #d655a5, #6053cb 60%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(10%, #ff9c8d), color-stop(#d655a5), color-stop(60%, #6053cb));
+  background: linear-gradient(90deg, #ff9c8d 10%, #d655a5, #6053cb 60%);
+  -webkit-animation: bghover 15s linear infinite;
+  animation: bghover 15s linear infinite;
+  background-size: 400% 400%;
+  opacity: 1;
+}
+/* demo noel */
+
+.clx_1 {
+  width: 120px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  transform: translate(40%,-30%);
+}
+.clx_2{
+  width: 150px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  transform: translateX(-40%);
+}
+@media (max-width: 767px){
+  .clx_1{
+    transform: translate(20%,-30%);
+  }
+  .clx_2{
+    transform: translateX(-20%);
+  }
+}
 /* end demos */
 
 .empower .col-left {

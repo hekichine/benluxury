@@ -849,3 +849,139 @@ class stickyBanner extends HTMLElement{
   }
 }
 customElements.define('sticky-banner',stickyBanner)
+
+
+// Effect snowball 
+
+function getRandomInt(min, max) {
+	return Math.round(Math.random() * (max - min)) + min;
+}
+
+class Snow {
+	constructor(color_rgb,w,h,ctx) {
+		this.reset();
+		this.rgb = color_rgb;
+    this.w = w;
+    this.h =h;
+    this.ctx = ctx;
+	}
+	reset() {
+		this.x = getRandomInt(0, this.w);
+		this.xc = ((this.x - (this.w / 2)) / (this.w / 2)) / 2;
+		this.y = getRandomInt(-(this.h * 0.3), this.h);
+		this.yc = getRandomInt(10, 15) / 10;
+		this.size = getRandomInt(10, 20) / 20;
+		this.a = getRandomInt(-10, 0) / 10;
+		this.ac = getRandomInt(3, 5) / 100;
+	}
+	draw() {
+		this.ctx.beginPath();
+		this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+		this.ctx.fillStyle = `rgba(${this.rgb}, ${this.a})`;
+		this.ctx.strokeStyle = `rgba(${this.rgb}, ${this.a})`;
+		this.ctx.fill();
+		this.ctx.stroke();
+		this.ctx.closePath();
+	}
+	update() {
+		this.x += this.xc;
+		this.y += this.yc;
+		this.a += this.ac;
+		if (this.a > 2) {
+			this.ac *= -1;
+		} else if (this.a < 0 && this.ac < 0) {
+			this.reset();
+		}
+	}
+}
+
+class Snow2 {
+	constructor(color_rgb,w,h,ctx) {
+		this.reset();
+		this.rgb = color_rgb;
+    this.w=w;
+    this.h=h;
+    this.ctx=ctx;
+	}
+	reset() {
+		this.x = getRandomInt(0, this.w);
+		this.y = getRandomInt(0, this.h);
+		this.size = getRandomInt(0, 5) / 20;
+		this.a = getRandomInt(-10, 0) / 10;
+		this.ac = 0.01;
+	}
+	draw() {
+		this.ctx.beginPath();
+		this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+		this.ctx.fillStyle = `rgba(${this.rgb}, ${this.a})`;
+		this.ctx.strokeStyle = `rgba(${this.rgb}, ${this.a})`;
+		this.ctx.fill();
+		this.ctx.stroke();
+		this.ctx.closePath();
+	}
+	update() {
+		this.y -= 0.1;
+		this.a += this.ac;
+		if (this.a > 1.5) {
+			this.ac *= -1;
+		} else if (this.a < 0 && this.ac < 0) {
+			this.reset();
+		}
+	}
+}
+
+
+class SnowBall extends HTMLElement{
+
+  constructor(){
+    super();
+    this.configs = JSON.parse(this.getAttribute('config'))
+    if(!this.configs) return;
+    this.canvas = this.querySelector('canvas');
+    this.context = this.canvas.getContext('2d');
+    this.w = this.canvas.width = window.innerWidth;
+    this.h = this.canvas.height = window.innerHeight;
+    this.snows = [];
+    this.snows2 = [];
+    this.init();
+    window.addEventListener("resize", () => {
+      this.resizeReset()
+    });
+  }
+  init(){
+    this.resizeReset();
+    this.animationLoop();
+  }
+  resizeReset(){
+    this.w = this.canvas.width = window.innerWidth;
+    this.h = this.canvas.height = window.innerHeight;
+    this.snows = [];
+    this.snows2 = [];
+
+    for(let i =0 ; i< this.configs.count; i++){
+      this.snows.push(new Snow(this.configs.color_rgb,this.w,this.h,this.context))
+    }
+    for (let i = 0; i < this.configs.count; i++) {
+      this.snows2.push(new Snow2(this.configs.color_rgb2,this.w,this.h,this.context));
+    }
+  }
+  animationLoop(){
+    this.context.clearRect(0,0,this.w,this.h);
+    this.drawScene();
+    requestAnimationFrame(() => {
+      this.animationLoop();
+    });
+  }
+  drawScene(){
+    for (let i = 0; i < this.snows.length; i++) {
+      this.snows[i].update();
+      this.snows[i].draw();
+    }
+    for (let i = 0; i < this.snows2.length; i++) {
+      this.snows2[i].update();
+      this.snows2[i].draw();
+    }
+  }
+}
+customElements.define('snow-ball',SnowBall);
+
