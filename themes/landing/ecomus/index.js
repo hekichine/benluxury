@@ -2,10 +2,10 @@ const app = {
   header_sticky: () => {
     console.log("Header sticky is active");
     // Hide header on scroll down
-    let didScroll;
-    let lastScrollTop = 0;
-    let delta = 5;
-    let navbarHeight = $("header").outerHeight();
+    var didScroll;
+    var lastScrollTop = 0;
+    var delta = 5;
+    var navbarHeight = $("header").outerHeight();
 
     $(window).scroll(function (event) {
       didScroll = true;
@@ -19,7 +19,7 @@ const app = {
     }, 250);
 
     function hasScrolled() {
-      let st = $(this).scrollTop();
+      var st = $(this).scrollTop();
 
       // Make scroll more than delta
       if (Math.abs(lastScrollTop - st) <= delta) return;
@@ -67,11 +67,11 @@ const app = {
   cursor: () => {
     console.log("Cursor glowing is active");
     if (window.innerWidth < 1149) {
-      console.log("Cursor glowing is disable on tablet & mobile");
+      console.log("Cursor glowing is disable on tabvar & mobile");
       return;
     }
     // hiden when stop moving
-    let timer;
+    var timer;
     const mouse_stop = () => {
       $('cursor').find('.cursor-glow canvas').removeClass('opacity-1');
       $('cursor').find('.cursor-glow canvas').addClass('opacity-0');
@@ -115,8 +115,8 @@ const app = {
         mouse_on();
         clearTimeout(timer);
         timer = setTimeout(mouse_stop, 300);
-        let x = e.clientX;
-        let y = e.clientY;
+        var x = e.clientX;
+        var y = e.clientY;
 
         $('.cursor-glow canvas').css({ 'top': y, 'left': x })
       });
@@ -124,13 +124,13 @@ const app = {
 
   },
   filter: () => {
-    let $grid = $("#isotope").isotope({
+    var $grid = $("#isotope").isotope({
       itemSelector: ".isotope-item",
       layoutMode: "fitRows",
       filter: "*",
     });
     $("[filter-tabs]").on("click", "button", function () {
-      let filterValue = $(this).attr("data-filter");
+      var filterValue = $(this).attr("data-filter");
       $grid.isotope({ filter: filterValue });
     });
 
@@ -274,7 +274,7 @@ const app = {
       $('#tabs_demo').find('button.is-active').removeClass('is-active');
       $(this).addClass('is-active');
       $('.tabs_demo').find('.tabs_shop_splide.control-active').removeClass('control-active');
-      let id = $(this).attr('aria-controls');
+      var id = $(this).attr('aria-controls');
       // console.log(id);
       $(`#${id}`).addClass('control-active')
     })
@@ -290,21 +290,21 @@ const app = {
 
   },
   galaxy: () => {
-    let number_of_star = 200;
+    var number_of_star = 200;
 
-    let random_number = function (min, max) {
+    var random_number = function (min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     };
 
-    let createStars = function () {
-      let star_rotation = 'move_right;';
-      for (let i = 0; i < number_of_star; i++) {
+    var createStars = function () {
+      var star_rotation = 'move_right;';
+      for (var i = 0; i < number_of_star; i++) {
         rot = (star_rotation == 'move_right;' ? 'move_left;' : 'move_right;');
-        let star_top = random_number(0, 300);
-        let star_left = random_number(0, 1000);
-        let star_radius = 1;
-        let star_duration = random_number(3, 6);
-        let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        var star_top = random_number(0, 300);
+        var star_left = random_number(0, 1000);
+        var star_radius = 1;
+        var star_duration = random_number(3, 6);
+        var randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
         document.getElementById('galaxy_eff').innerHTML += "<div class='star' style='top: " + star_top + "px; left: " + star_left + "px; width: " + star_radius + "px; height: " + star_radius + "px; " +
           "animation-name:" + star_rotation + "; animation-duration: " + star_duration + "s;background-color:#" + randomColor + "'></div>";
@@ -317,7 +317,7 @@ const app = {
     const str = "highconverting";
     const text = $('#text-circle');
     // console.log(text);
-    for (let i = 0; i < str.length; i++) {
+    for (var i = 0; i < str.length; i++) {
       text.append(`<span style="transform:rotate(${26 * i}deg)">${str[i]}</span>`);
     }
 
@@ -325,12 +325,12 @@ const app = {
     const str2 = "one-time payment";
     const text2 = $('#payment_circle');
     // console.log(text);
-    for (let i = 0; i < str2.length; i++) {
+    for (var i = 0; i < str2.length; i++) {
       text2.append(`<span style="transform:rotate(${9 * i}deg)">${str2[i]}</span>`);
     }
   },
   back_to_top: () => {
-    let btn = $('back-to-top');
+    var btn = $('back-to-top');
 
     $(window).on('scroll', function () {
       if ($(window).scrollTop() > 300) {
@@ -443,7 +443,7 @@ const app = {
       if (!config.reveal.enable) {
         return
       }
-      let reveals = document.querySelectorAll('[reveal]');
+      var reveals = document.querySelectorAll('[reveal]');
       if (reveals) {
         console.log("Reveal is working");
       } else {
@@ -476,9 +476,9 @@ const app = {
             }
             if (revealTop < windowHeight - revealPoint) {
               if (revealTop > -50) {
-                let schemas = Math.abs(1 - revealTop / elHeight);
-                let opacity = Math.min((Math.abs(1 - (revealTop - 350) / elHeight)), 1);
-                let rotate = Math.min((posPoint * schemas - (posPoint - 10)), 0)
+                var schemas = Math.abs(1 - revealTop / elHeight);
+                var opacity = Math.min((Math.abs(1 - (revealTop - 350) / elHeight)), 1);
+                var rotate = Math.min((posPoint * schemas - (posPoint - 10)), 0)
                 el.style.opacity = `${opacity}`;
                 el.style.transform = `translate3d(0px,0px,0px) rotateX(${rotate}deg)`
               }
@@ -501,7 +501,7 @@ const app = {
 
       const parent = $(this).parent();
       const popup_html = $('popup');
-      let p_obj = {
+      var p_obj = {
         title: parent.find('.title').text(),
         des: parent.find('.des-hide').clone(),
         data_img: parent.find('.img').clone(),
@@ -546,15 +546,15 @@ const app = {
     })
   },
   scrollspy: () => {
-    let sectionIds = $('a.scrollspy_s');
+    var sectionIds = $('a.scrollspy_s');
     console.log("SCrollspy is active");
     $(document).scroll(function () {
       sectionIds.each(function () {
-        let container = $(this).attr('href');
-        let containerOffset = $(container).offset().top;
-        let containerHeight = $(container).outerHeight();
-        let containerBottom = containerOffset + containerHeight;
-        let scrollPosition = $(document).scrollTop();
+        var container = $(this).attr('href');
+        var containerOffset = $(container).offset().top;
+        var containerHeight = $(container).outerHeight();
+        var containerBottom = containerOffset + containerHeight;
+        var scrollPosition = $(document).scrollTop();
 
         if (scrollPosition < containerBottom - 20 && scrollPosition >= containerOffset - 20) {
           $(this).addClass('active');
@@ -585,7 +585,7 @@ const app = {
       }
       e.preventDefault();
       if ($(this).attr('href') != '#comingsoon') {
-        let url_link = $(this).attr('href');
+        var url_link = $(this).attr('href');
         $('.pass_pop').addClass('open');
         $('.pass_pop .view_more').attr('href', `${url_link}`);
       } else {
@@ -713,7 +713,7 @@ class topBar extends HTMLElement {
   }
   initSlider() {
 
-    let self = this;
+    var self = this;
     if (!self.slider) {
       return;
     }
@@ -728,7 +728,7 @@ class topBar extends HTMLElement {
     })
   }
   close() {
-    let self = this;
+    var self = this;
     if (!self.btn_close) {
       return;
     }
@@ -751,11 +751,11 @@ class partner extends HTMLElement {
 
   }
   clickAction() {
-    let self = this;
+    var self = this;
     self.addEventListener('click', function () {
       self.classList.add('is-active');
       self.popup.classList.add('open');
-      let data = {
+      var data = {
         img: self.querySelector('[pn-img]').getAttribute('src'),
         content: self.querySelector('[pn-content]').cloneNode(true).innerHTML,
       }
@@ -773,7 +773,7 @@ class partner extends HTMLElement {
     }
   }
   openModal(data) {
-    let self = this;
+    var self = this;
     self.popup.querySelector('img').setAttribute('src', data.img);
     self.popup.querySelector('.p_content').innerHTML = data.content;
   }
@@ -790,14 +790,14 @@ class loadingPage extends HTMLElement {
     this.load_wrap = this.querySelector('#loader-wrap');
 
 
-    let fn = this.pageOnLoad.bind(this);
+    var fn = this.pageOnLoad.bind(this);
     document.addEventListener(
       "DOMContentLoaded", fn,
       false
     );
   }
   pageOnLoad() {
-    let self = this;
+    var self = this;
     setTimeout(function () {
       self.loading.className = "slideDown";
     }, 100);
@@ -958,10 +958,10 @@ class SnowBall extends HTMLElement{
     this.snows = [];
     this.snows2 = [];
 
-    for(let i =0 ; i< this.configs.count; i++){
+    for(var i =0 ; i< this.configs.count; i++){
       this.snows.push(new Snow(this.configs.color_rgb,this.w,this.h,this.context))
     }
-    for (let i = 0; i < this.configs.count; i++) {
+    for (var i = 0; i < this.configs.count; i++) {
       this.snows2.push(new Snow2(this.configs.color_rgb2,this.w,this.h,this.context));
     }
   }
@@ -973,11 +973,11 @@ class SnowBall extends HTMLElement{
     });
   }
   drawScene(){
-    for (let i = 0; i < this.snows.length; i++) {
+    for (var i = 0; i < this.snows.length; i++) {
       this.snows[i].update();
       this.snows[i].draw();
     }
-    for (let i = 0; i < this.snows2.length; i++) {
+    for (var i = 0; i < this.snows2.length; i++) {
       this.snows2[i].update();
       this.snows2[i].draw();
     }
@@ -985,3 +985,913 @@ class SnowBall extends HTMLElement{
 }
 customElements.define('snow-ball',SnowBall);
 
+function randColor() {
+  var r = Math.floor(Math.random() * 256);
+  var g = Math.floor(Math.random() * 256);
+  var b = Math.floor(Math.random() * 256);
+  var color = 'rgb($r, $g, $b)';
+  color = color.replace('$r', r);
+  color = color.replace('$g', g);
+  color = color.replace('$b', b);
+  return color;
+}
+class LunarEvent extends HTMLElement{
+
+  constructor(){
+    super();
+    console.log("Lunar event is running");
+    this.canvas = this.querySelector('canvas');
+    if(!this.canvas) return;
+
+    this.initSize();
+
+    this.context = this.canvas.getContext('2d');
+
+    this.listFire = [];
+    this.listFirework = [];
+    this.listText = [];
+    this.listSpecial = [];
+    this.listSpark = [];
+    this.lights = [];
+    this.fireNumber = 10;
+    this.center = { 
+      x: this.canvas.width / 2, 
+      y: this.canvas.height / 2 
+    };
+    this.range = 100;
+    this.fired = 0;
+    this.onHold = 0;
+    this.supprise = false;
+    this.textIndex = 0;
+    this.textString = 'happylunarnewyear2025';
+  
+    // Matrix positions 
+    this.textMatrix = [
+      4.5, 0, 5.5, 0, 6.5, 0, 7.5, 0, 8.5, 0, 
+      0, 1, 1, 1, 2, 1, 3, 1, 4, 1, 6, 1, 7, 1, 8, 1, 10, 1, 11, 1, 12, 1, 13, 1,
+      5, 2, 6, 2, 7, 2, 8, 2
+    ];
+    
+    this.chars = {
+      h: [
+        0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7,
+        1, 3, 2, 3, 3, 3, 4, 3,
+        5, 0, 5, 1, 5, 2, 5, 3, 5, 4, 5, 5, 5, 6, 5, 7
+      ],
+      a: [
+        2, 0, 2, 1, 2, 2, 1, 2, 1, 3, 1, 4, 1, 5, 0, 5, 0, 6, 0, 7, 2, 5,
+        3, 0, 3, 1, 3, 2, 4, 2, 4, 3, 4, 4, 4, 1, 5, 5, 5, 6, 5, 7, 3, 5
+      ],
+      p: [
+        0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7,
+        1, 0, 2, 0, 3, 0, 4, 1, 5, 2, 4, 3, 3, 4, 2, 4, 1, 4
+      ],
+      y: [
+        0, 0, 0, 1, 1, 1, 1, 2, 1, 3, 2, 3, 2, 4, 2, 5, 2, 6, 2, 7,
+        3, 2, 3, 3, 4, 1, 4, 2, 5, 0, 5, 1
+      ],
+      l: [
+        0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7,
+        1, 7, 2, 7, 3, 7, 4, 7, 5, 7
+      ],
+      u: [
+        0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6,
+        1, 7, 2, 7, 3, 7, 4, 7,
+        5, 0, 5, 1, 5, 2, 5, 3, 5, 4, 5, 5, 5, 6
+      ],
+      n: [
+        0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7,
+        1, 1, 1, 2, 2, 2, 2, 3, 2, 4, 3, 4, 3, 5, 4, 5, 4, 6,
+        5, 0, 5, 1, 5, 2, 5, 3, 5, 4, 5, 5, 5, 6, 5, 7
+      ],
+      e: [
+        0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7,
+        1, 0, 2, 0, 3, 0, 4, 0, 5, 0,
+        1, 3, 2, 3, 3, 3, 4, 3,
+        1, 7, 2, 7, 3, 7, 4, 7, 5, 7
+      ],
+      w: [
+        0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 1, 6,
+        2, 1, 2, 2, 2, 3, 2, 4, 2, 5, 2, 6, 2, 7, 3, 7,
+        5, 0, 5, 1, 5, 2, 5, 3, 5, 4, 5, 5, 4, 5, 4, 6
+      ],
+      r: [
+        0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7,
+        1, 0, 2, 0, 3, 0, 4, 1, 5, 2, 4, 3, 3, 4, 2, 4, 1, 4,
+        1, 5, 2, 5, 3, 6, 4, 6, 5, 7
+      ],
+      '2': [         
+        0, 1, 1, 0, 2, 0, 3, 0, 4, 0,
+        5, 1, 5, 2, 5, 3,
+        4, 4, 3, 4, 2, 5,
+        1, 6, 0, 7, 1, 7, 2, 7, 3, 7, 4, 7, 5, 7
+      ],
+      '0': [
+        1, 0, 2, 0, 3, 0, 4, 0,
+        0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6,
+        1, 7, 2, 7, 3, 7, 4, 7,
+        5, 1, 5, 2, 5, 3, 5, 4, 5, 5, 5, 6
+      ],
+      '5': [
+        0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0,
+        0, 1, 0, 2, 0, 3,
+        1, 3, 2, 3, 3, 3, 4, 3, 5, 4,
+        5, 5, 5, 6,
+        0, 7, 1, 7, 2, 7, 3, 7, 4, 7
+      ]
+    }
+  
+    this.setUpEvent();
+  }
+  setUpEvent(){
+    this.init();
+    this.resizeEvent();
+    this.loop();
+  }
+  initSize(){
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+
+    Object.assign(this.canvas.style, {
+      position: "fixed",
+      inset: "0"
+    })
+  }
+  resizeEvent(){
+    window.addEventListener('resize', () => {
+      this.initSize()
+      this.context.fillStyle = "#000003";
+      this.context.fillRect(0,0,this.canvas.width,this.canvas.height);
+      this.center = {
+        x: this.canvas.width / 2,
+        y: this.canvas.height / 2
+      }
+    })
+  }
+  init(){
+    this.context.fillStyle ="#000003";
+    this.context.fillRect(0,0,this.canvas.width,this.canvas.height);
+
+    for (var i = 0; i < this.fireNumber; i++) {
+      var fire = {
+        x: Math.random() * this.range / 2 - this.range / 4 + this.center.x,
+        y: Math.random() * this.range * 2.5 + this.canvas.height,
+        size: Math.random() + 0.5,
+        fill: '#ff3',
+        vx: Math.random() - 0.5,
+        vy: -(Math.random() + 4),
+        ax: Math.random() * 0.06 - 0.03,
+        delay: Math.round(Math.random() * this.range) + this.range * 4,
+        hold: false,
+        alpha: 1,
+        far: Math.random() * this.range + (this.center.y - this.range)
+      };
+      fire.base = {
+        x: fire.x,
+        y: fire.y,
+        vx: fire.vx,
+        vy: fire.vy
+      };
+      //
+      this.listFire.push(fire);
+      // play sound
+      // playLaunchSound();
+    }
+      
+  }
+  initText(){
+    var i = this.textIndex;
+    var velocity = Math.random() * 0.25 + 1;
+    var shift = {
+      x: - (Math.random()+2),
+      y: -(Math.random()+3)
+    }
+    var char = this.chars[this.textString[i]];
+    var width = 80;
+    var half = 6.5 * width;
+    var left = this.textMatrix[i*2] * width - half;
+    var top = this.textMatrix[i*2 +1] * this.range * 1.2 - this.range * 2.4;
+
+    for (var j = 0; j < this.fireNumber * char.length * 0.25; j++) {
+			var rand = Math.floor(Math.random() * char.length * 0.5);
+			var x = char[rand * 2] + shift.x;
+			var y = char[rand * 2 + 1] + shift.y;
+			var text = {
+				x: this.center.x + left * 0.9,
+				y: this.center.y + top,
+				left: this.center.x + left,
+				size: Math.random() + 0.5,
+				fill: '#ff3',
+				vx: x * (velocity + (Math.random() - 0.5) * 0.5),
+				vy: y * (velocity + (Math.random() - 0.5) * 0.5),
+				ay: 0.08,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 1.5
+			}
+			text.base = {
+				life: text.life,
+				size: text.size,
+			};
+			text.direct = (text.left - text.x) * 0.08;
+			this.listText.push(text);
+		}
+
+    this.lights.push({ 
+      x: this.center.x + left * 0.9, 
+      y: this.center.y + top, 
+      color: text.fill, 
+      radius: this.range * 2 
+    });
+		if (++this.textIndex < this.textString.length) {
+			setTimeout(this.initText(), 10);
+		}
+		else {
+			this.textIndex = 0;
+		}
+  }
+  initSpark(){
+    var x = Math.random() * this.range * 3 - this.range * 1.5 + this.center.x;
+		var vx = Math.random() - 0.5;
+		var vy = -(Math.random() + 4);
+		var ax = Math.random() * 0.04 - 0.02;
+		var far = Math.random() * this.range * 4 - this.range + this.center.y;
+		var direct = ax * 10 * Math.PI;
+		var max = this.fireNumber * 0.5;
+		for (var i = 0; i < max; i++) {
+			var special = {
+				x: x,
+				y: Math.random() * this.range * 0.25 + this.canvas.height,
+				size: Math.random() + 2,
+				fill: '#ff3',
+				vx: vx,
+				vy: vy,
+				ax: ax,
+				direct: direct,
+				alpha: 1
+			};
+			special.far = far - (special.y - this.canvas.height);
+			this.listSpecial.push(special);
+			// play sound
+			// playLaunchSound();
+		}
+  }
+  createFirework(type, fire) {
+    switch(type) {
+        case 'double-full':
+            return this.makeDoubleFullCircleFirework(fire);
+        case 'planet':
+            return this.makePlanetCircleFirework(fire);
+        case 'full':
+            return this.makeFullCircleFirework(fire);
+        case 'double':
+            return this.makeDoubleCircleFirework(fire);
+        case 'heart':
+            return this.makeHeartFirework(fire);
+        case 'circle':
+            return this.makeCircleFirework(fire);
+        default:
+            return this.makeRandomFirework(fire);
+    }
+  }
+  update() {
+    // console.log("update")
+		// update fire logic
+		for (var i = 0; i < this.listFire.length; i++) {
+			var fire = this.listFire[i];
+			//
+			if (fire.y <= fire.far) {
+				// play sound
+				// playExpSound();
+				// case add firework
+				this.fired++;
+        const types = ['double-full', 'planet', 'full', 'double', 'heart', 'circle', 'random'];
+        const randomType = types[Math.floor(Math.random() * types.length)];
+        var color = this.createFirework(randomType, fire);
+				// light
+				this.lights.push({ x: fire.x, y: fire.y, color: color, radius: this.range * 2 });
+				// reset
+				fire.y = fire.base.y;
+				fire.x = fire.base.x;
+				// special
+				if (this.fired % 33 == 0) {
+					this.initSpark();
+				}
+				// on hold
+				this.supprise = this.fired % 100 == 0 ? true : this.supprise;
+				if (this.supprise) {
+					fire.vx = 0;
+					fire.vy = 0;
+					fire.ax = 0;
+					fire.hold = true;
+					this.onHold++;
+				}
+				else {
+					fire.vx = fire.base.vx;
+					fire.vy = fire.base.vy;
+					fire.ax = Math.random() * 0.06 - 0.03;
+					// play sound
+					// playLaunchSound();
+				}
+			}
+			//
+			if (fire.hold && fire.delay <= 0) {
+				this.onHold--;
+				fire.hold = false;
+				fire.delay = Math.round(Math.random() * this.range) + this.range * 4;
+				fire.vx = fire.base.vx;
+				fire.vy = fire.base.vy;
+				fire.ax = Math.random() * 0.06 - 0.03;
+				fire.alpha = 1;
+				// play sound
+				// playLaunchSound();
+			}
+			else if (fire.hold && fire.delay > 0) {
+				fire.delay--;
+			}
+			else {
+				fire.x += fire.vx;
+				fire.y += fire.vy;
+				fire.vx += fire.ax;
+				fire.alpha = (fire.y - fire.far) / fire.far;
+			}
+		}
+
+		// update firework logic
+		for (var i = this.listFirework.length - 1; i >= 0; i--) {
+			var firework = this.listFirework[i];
+			if (firework) {
+				firework.vx *= 0.9;
+				firework.vy *= 0.9;
+				firework.x += firework.vx;
+				firework.y += firework.vy;
+				firework.vy += firework.ay;
+				firework.alpha = firework.life / firework.base.life;
+				firework.size = firework.alpha * firework.base.size;
+				firework.alpha = firework.alpha > 0.6 ? 1 : firework.alpha;
+				//
+				firework.life--;
+				if (firework.life <= 0) {
+					this.listFirework.splice(i, 1);
+				}
+			}
+		}
+
+		// supprise happy new year!
+		if (this.supprise && this.onHold == 10) {
+			this.supprise = false;
+			setTimeout(()=> {
+        this.initText();
+      }, 3000);
+		}
+    
+    // setInterval(()=> {
+    //   this.initText();
+    // }, 3000);
+
+		// update text logic
+		for (var i = this.listText.length - 1; i >= 0; i--) {
+			var text = this.listText[i];
+			text.vx *= 0.9;
+			text.vy *= 0.9;
+			text.direct *= 0.9;
+			text.x += text.vx + text.direct;
+			text.y += text.vy;
+			text.vy += text.ay;
+			text.alpha = text.life / text.base.life;
+			text.size = text.alpha * text.base.size;
+			text.alpha = text.alpha > 0.6 ? 1 : text.alpha;
+			//
+			text.life--;
+			if (text.life <= 0) {
+				this.listText.splice(i, 1);
+			}
+		}
+
+		// update special logic
+		for (var i = this.listSpecial.length - 1; i >= 0; i--) {
+			var special = this.listSpecial[i];
+			if (special.y <= special.far) {
+				// play sound
+				// playExpSound();
+				// light
+				this.lights.push({ x: special.x, y: special.y, color: special.fill, alpha: 0.02, radius: this.range * 2 });
+				//
+				this.makeSpark(special);
+				// remove from list
+				this.listSpecial.splice(i, 1);
+			}
+			else {
+				special.x += special.vx;
+				special.y += special.vy;
+				special.vx += special.ax;
+				special.alpha = (special.y - special.far) / special.far;
+			}
+		}
+
+		// update spark logic
+		for (var i = this.listSpark.length - 1; i >= 0; i--) {
+			var spark = this.listSpark[i];
+			if (spark) {
+				spark.vx *= 0.9;
+				spark.vy *= 0.9;
+				spark.x += spark.vx;
+				spark.y += spark.vy;
+				spark.vy += spark.ay;
+				spark.alpha = spark.life / spark.base.life + 0.2;
+				//
+				spark.life--;
+				if (spark.life < spark.base.life * 0.8 && spark.life > 0) {
+					//
+					spark.chain--;
+					this.chainSpark(spark);
+				}
+				if (spark.life <= 0) {
+					this.listSpark.splice(i, 1);
+				}
+			}
+		}
+	}
+  draw() {
+    // console.log("draw")
+		// clear
+		this.context.globalCompositeOperation = 'source-over';
+		this.context.globalAlpha = 0.2;
+		this.context.fillStyle = "#000003";
+		this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+		// re-draw
+		// this.context.globalCompositeOperation = 'screen';
+		for (var i = 0; i < this.listFire.length; i++) {
+			var fire = this.listFire[i];
+			this.context.globalAlpha = fire.alpha;
+			this.context.beginPath();
+			this.context.arc(fire.x, fire.y, fire.size, 0, Math.PI * 2);
+			this.context.closePath();
+			this.context.fillStyle = fire.fill;
+			this.context.fill();
+		}
+
+		for (var i = 0; i < this.listFirework.length; i++) {
+			var firework = this.listFirework[i];
+			this.context.globalAlpha = firework.alpha;
+			this.context.beginPath();
+			this.context.arc(firework.x, firework.y, firework.size, 0, Math.PI * 2);
+			this.context.closePath();
+			this.context.fillStyle = firework.fill;
+			this.context.fill();
+		}
+
+		for (var i = 0; i < this.listSpecial.length; i++) {
+			var special = this.listSpecial[i];
+			this.context.globalAlpha = special.alpha;
+			// this.context.beginPath();
+			// this.context.arc(special.x, special.y, special.size, 0, Math.PI * 2);
+			// this.context.closePath();
+			// this.context.fill();
+			this.context.fillStyle = special.fill;
+			this.context.fillRect(special.x - special.size, special.y - special.size, special.size * 2, special.size *2);
+		}
+
+		for (var i = 0; i < this.listSpark.length; i++) {
+			var spark = this.listSpark[i];
+			this.context.globalAlpha = spark.alpha;
+			// this.context.beginPath();
+			// this.context.arc(spark.x, spark.y, spark.size, 0, Math.PI * 2);
+			// this.context.closePath();
+			// this.context.fill();
+			this.context.fillStyle = spark.fill;
+			this.context.fillRect(spark.x - spark.size, spark.y - spark.size, spark.size * 2, spark.size *2);
+		}
+
+		// light effect
+		while (this.lights.length) {
+			var light = this.lights.pop();
+			var gradient = this.context.createRadialGradient(light.x, light.y, 0, light.x, light.y, light.radius);
+			gradient.addColorStop(0, '#fff');
+			gradient.addColorStop(0.2, light.color);
+			gradient.addColorStop(0.8, 'rgba(0, 0, 0, 0)');
+			gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+			this.context.globalAlpha = light.alpha ? light.alpha : 0.25;
+			this.context.fillStyle = gradient;
+			this.context.fillRect(light.x - light.radius, light.y - light.radius, light.radius * 2, light.radius * 2);
+		}
+
+		// supprise: HAPPY LUNAR NEW YEAR 2017!
+		for (var i = 0; i < this.listText.length; i++) {
+			var text = this.listText[i];
+			this.context.globalAlpha = text.alpha;
+			this.context.fillStyle = text.fill;
+			this.context.fillRect(text.x - text.size, text.y - text.size, text.size * 2, text.size * 2);
+		}
+	}
+  loop(){
+    requestAnimationFrame(()=> {
+      this.loop();
+    })
+    this.update();
+    this.draw();
+  }
+  playExpSound() {
+		var sound = listExpSound[Math.floor(Math.random() * listExpSound.length)];
+		sound.volume = Math.random() * 0.4 + 0.1;
+		sound.play();
+	}
+  playLaunchSound() {
+		setTimeout(function() {
+			var sound = listLaunchSound[Math.floor(Math.random() * listLaunchSound.length)];
+			sound.volume = 0.05;
+			sound.play();
+		}, 200);
+	}
+  makeCircleFirework(fire) {
+		var color = randColor();
+		var velocity = Math.random() * 2 + 6;
+		var max = this.fireNumber * 5;
+		for (var i = 0; i < max; i++) {
+			var rad = (i * Math.PI * 2) / max;
+			var firework = {
+				x: fire.x,
+				y: fire.y,
+				size: Math.random() + 1.5,
+				fill: color,
+				vx: Math.cos(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				vy: Math.sin(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				ay: 0.04,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 2
+			};
+			firework.base = {
+				life: firework.life,
+				size: firework.size
+			};
+			this.listFirework.push(firework);
+		}
+		return color;
+	}
+  makeDoubleCircleFirework(fire) {
+		var color = randColor();
+		var velocity = Math.random() * 2 + 8;
+		var max = this.fireNumber * 3;
+		for (var i = 0; i < max; i++) {
+			var rad = (i * Math.PI * 2) / max;
+			var firework = {
+				x: fire.x,
+				y: fire.y,
+				size: Math.random() + 1.5,
+				fill: color,
+				vx: Math.cos(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				vy: Math.sin(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				ay: 0.04,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 1.5
+			};
+			firework.base = {
+				life: firework.life,
+				size: firework.size
+			};
+			this.listFirework.push(firework);
+		}
+		color = randColor();
+		velocity = Math.random() * 3 + 4;
+		for (var i = 0; i < max; i++) {
+			var rad = (i * Math.PI * 2) / max;
+			var firework = {
+				x: fire.x,
+				y: fire.y,
+				size: Math.random() + 1.5,
+				fill: color,
+				vx: Math.cos(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				vy: Math.sin(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				ay: 0.04,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 1.5
+			};
+			firework.base = {
+				life: firework.life,
+				size: firework.size
+			};
+			this.listFirework.push(firework);
+		}
+		return color;
+	}
+  makePlanetCircleFirework(fire) {
+		var color = '#aa0609';
+		var velocity = Math.random() * 2 + 4;
+		var max = this.fireNumber * 2;
+		for (var i = 0; i < max; i++) {
+			var rad = (i * Math.PI * 2) / max;
+			var firework = {
+				x: fire.x,
+				y: fire.y,
+				size: Math.random() + 1.5,
+				fill: color,
+				vx: Math.cos(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				vy: Math.sin(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				ay: 0.04,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 1.5
+			};
+			firework.base = {
+				life: firework.life,
+				size: firework.size
+			};
+			this.listFirework.push(firework);
+		}
+		max = this.fireNumber * 4;
+		for (var i = 0; i < max; i++) {
+			var rad = (i * Math.PI * 2) / max;
+			var firework = {
+				x: fire.x,
+				y: fire.y,
+				size: Math.random() + 1.5,
+				fill: color,
+				vx: Math.cos(rad) * velocity * Math.random(),
+				vy: Math.sin(rad) * velocity * Math.random(),
+				ay: 0.04,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 1.5
+			};
+			firework.base = {
+				life: firework.life,
+				size: firework.size
+			};
+			this.listFirework.push(firework);
+		}
+		max = this.fireNumber * 3;
+		color = '#ff9';
+		var rotate = Math.random() * Math.PI * 2;
+		var vx = velocity *  (Math.random() + 2);
+		var vy = velocity * 0.6;
+		for (var i = 0; i < max; i++) {
+			var rad = (i * Math.PI * 2) / max;
+			// calc x, y for ellipse
+			var cx = Math.cos(rad) * vx + (Math.random() - 0.5) * 0.5;
+			var cy = Math.sin(rad) * vy + (Math.random() - 0.5) * 0.5;
+			var firework = {
+				x: fire.x,
+				y: fire.y,
+				size: Math.random() + 1.5,
+				fill: color,
+				vx: cx * Math.cos(rotate) - cy * Math.sin(rotate), // rotate x ellipse
+				vy: cx * Math.sin(rotate) + cy * Math.cos(rotate), // rotate y ellipse
+				ay: 0.02,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 1.5
+			};
+			firework.base = {
+				life: firework.life,
+				size: firework.size
+			};
+			this.listFirework.push(firework);
+		}
+		return '#aa0609';
+	}
+  makeFullCircleFirework(fire) {
+		var color = randColor();
+		var velocity = Math.random() * 8 + 8;
+		var max = this.fireNumber * 3;
+		for (var i = 0; i < max; i++) {
+			var rad = (i * Math.PI * 2) / max;
+			var firework = {
+				x: fire.x,
+				y: fire.y,
+				size: Math.random() + 1.5,
+				fill: color,
+				vx: Math.cos(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				vy: Math.sin(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				ay: 0.06,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 1.5
+			};
+			firework.base = {
+				life: firework.life,
+				size: firework.size
+			};
+			this.listFirework.push(firework);
+		}
+		max = this.fireNumber * Math.round(Math.random() * 4 + 4);
+		for (var i = 0; i < max; i++) {
+			var rad = (i * Math.PI * 2) / max;
+			var firework = {
+				x: fire.x,
+				y: fire.y,
+				size: Math.random() + 1.5,
+				fill: color,
+				vx: Math.cos(rad) * velocity * Math.random(),
+				vy: Math.sin(rad) * velocity * Math.random(),
+				ay: 0.06,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 1.5
+			};
+			firework.base = {
+				life: firework.life,
+				size: firework.size
+			};
+			this.listFirework.push(firework);
+		}
+		return color;
+	}
+  makeDoubleFullCircleFirework(fire) {
+		var color = randColor();
+		var velocity = Math.random() * 8 + 8;
+		var max = this.fireNumber * 3;
+		for (var i = 0; i < max; i++) {
+			var rad = (i * Math.PI * 2) / max;
+			var firework = {
+				x: fire.x,
+				y: fire.y,
+				size: Math.random() + 1.5,
+				fill: color,
+				vx: Math.cos(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				vy: Math.sin(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				ay: 0.04,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 1.5
+			};
+			firework.base = {
+				life: firework.life,
+				size: firework.size
+			};
+			this.listFirework.push(firework);
+		}
+		color = randColor();
+		velocity = Math.random() * 3 + 4;
+		max = this.fireNumber * 2;
+		for (var i = 0; i < max; i++) {
+			var rad = (i * Math.PI * 2) / max;
+			var firework = {
+				x: fire.x,
+				y: fire.y,
+				size: Math.random() + 1.5,
+				fill: color,
+				vx: Math.cos(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				vy: Math.sin(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				ay: 0.06,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 1.5
+			};
+			firework.base = {
+				life: firework.life,
+				size: firework.size
+			};
+			this.listFirework.push(firework);
+		}
+		max = this.fireNumber * 4;
+		for (var i = 0; i < max; i++) {
+			var rad = (i * Math.PI * 2) / max;
+			var firework = {
+				x: fire.x,
+				y: fire.y,
+				size: Math.random() + 1.5,
+				fill: color,
+				vx: Math.cos(rad) * velocity * Math.random(),
+				vy: Math.sin(rad) * velocity * Math.random(),
+				ay: 0.06,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 1.5
+			};
+			firework.base = {
+				life: firework.life,
+				size: firework.size
+			};
+			this.listFirework.push(firework);
+		}
+		return color;
+	}
+  makeHeartFirework(fire) {
+		var color = randColor();
+		var velocity = Math.random() * 3 + 3;
+		var max = this.fireNumber * 5;
+		var rotate = Math.random() * Math.PI * 2;
+		for (var i = 0; i < max; i++) {
+			var rad = (i * Math.PI * 2) / max + rotate;
+			var v, p;
+			if (rad - rotate < Math.PI * 0.5) {
+				p = (rad - rotate) / (Math.PI * 0.5);
+				v = velocity + velocity * p;
+			}
+			else if (rad - rotate > Math.PI * 0.5 && rad - rotate < Math.PI) {
+				p = (rad - rotate - Math.PI * 0.5) / (Math.PI * 0.5);
+				v = velocity * (2 - p);
+			}
+			else if (rad - rotate > Math.PI && rad - rotate < Math.PI * 1.5) {
+				p = (rad - rotate - Math.PI) / (Math.PI * 0.5);
+				v = velocity * (1 - p);
+			}
+			else if (rad - rotate > Math.PI * 1.5 && rad - rotate < Math.PI * 2) {
+				p = (rad - rotate - Math.PI * 1.5) / (Math.PI * 0.5);
+				v = velocity * p;
+			}
+			else {
+				v = velocity;
+			}
+			v = v + (Math.random() - 0.5) * 0.25;
+			var firework = {
+				x: fire.x,
+				y: fire.y,
+				size: Math.random() + 1.5,
+				fill: color,
+				vx: Math.cos(rad) * v,
+				vy: Math.sin(rad) * v,
+				ay: 0.02,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 1.5
+			};
+			firework.base = {
+				life: firework.life,
+				size: firework.size
+			};
+			this.listFirework.push(firework);
+		}
+		return color;
+	}
+  makeRandomFirework(fire) {
+		var color = randColor();;
+		for (var i = 0; i < this.fireNumber * 5; i++) {
+			var firework = {
+				x: fire.x,
+				y: fire.y,
+				size: Math.random() + 1.5,
+				fill: color,
+				vx: Math.random() * 15 - 7.5,
+				vy: Math.random() * -15 + 5,
+				ay: 0.05,
+				alpha: 1,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 2
+			};
+			firework.base = {
+				life: firework.life,
+				size: firework.size
+			};
+			this.listFirework.push(firework);
+		}
+		return color;
+	}
+  makeSpark(special) {
+		var color = special.fill;
+		var velocity = Math.random() * 6 + 12;
+		var max = this.fireNumber;
+		for (var i = 0; i < max; i++) {
+			var rad = (Math.random() * Math.PI * 0.3 + Math.PI * 0.35) + Math.PI + special.direct;
+			var spark = {
+				x: special.x,
+				y: special.y,
+				size: Math.random() + 1,
+				fill: color,
+				vx: Math.cos(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				vy: Math.sin(rad) * velocity + (Math.random() - 0.5) * 0.5,
+				ay: 0.02,
+				alpha: 1,
+				rad: rad,
+				direct: special.direct,
+				chain: Math.round(Math.random() * 2) + 2,
+				life: Math.round(Math.random() * this.range / 2) + this.range / 2
+			};
+			spark.base = {
+				life: spark.life,
+				velocity: velocity
+			};
+			this.listSpark.push(spark);
+		}
+		return color;
+	}
+  chainSpark(parentSpark) {
+		var color = parentSpark.fill;
+		if (parentSpark.chain > 0) {
+			var velocity = parentSpark.base.velocity * 0.6;
+			var max = Math.round(Math.random() * 5);
+			for (var i = 0; i < max; i++) {
+				var rad = (Math.random() * Math.PI * 0.3 - Math.PI * 0.15) + parentSpark.rad + parentSpark.direct;
+				var spark = {
+					x: parentSpark.x,
+					y: parentSpark.y,
+					size: parentSpark.size * 0.6,
+					fill: color,
+					vx: Math.cos(rad) * velocity + (Math.random() - 0.5) * 0.5,
+					vy: Math.sin(rad) * velocity + (Math.random() - 0.5) * 0.5,
+					ay: 0.02,
+					alpha: 1,
+					rad: rad,
+					direct: parentSpark.direct,
+					chain: parentSpark.chain,
+					life: parentSpark.base.life * 0.8
+				};
+				spark.base = {
+					life: spark.life,
+					size: spark.size,
+					velocity: velocity
+				};
+				this.listSpark.push(spark);
+			}
+
+			if (Math.random() > 0.9 && parentSpark.chain > 1) {
+				// play sound
+				// playExpSound();
+			}
+		}
+		return color;
+	}
+  
+
+}
+customElements.define('lunar-event', LunarEvent)
