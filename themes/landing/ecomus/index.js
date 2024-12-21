@@ -1000,7 +1000,10 @@ class LunarEvent extends HTMLElement{
   constructor(){
     super();
     console.log("Lunar event is running");
-    this.canvas = this.querySelector('canvas');
+    this.attachShadow({ mode: "open" });
+    let canvasEl = document.createElement('canvas');
+    this.shadowRoot.appendChild(canvasEl.cloneNode(true))
+    this.canvas = this.shadowRoot.querySelector('canvas');
     if(!this.canvas) return;
 
     this.initSize();
@@ -1129,7 +1132,7 @@ class LunarEvent extends HTMLElement{
     })
   }
   init(){
-    this.context.fillStyle ="#000003";
+    this.context.fillStyle = "#000003";
     this.context.fillRect(0,0,this.canvas.width,this.canvas.height);
 
     for (var i = 0; i < this.fireNumber; i++) {
