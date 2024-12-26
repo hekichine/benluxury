@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="shortcut icon" href="../../../benluxury.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS v5.2.1 -->
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html{
+        scroll-behavior: smooth;
+        /* font-family: "Poppins", serif; */
+        font-family: "Albert Sans", serif;
+
+      }
+      .sidebar{
+        width: 300px;
+        padding: 50px 30px;
+        background: #23144e;
+        color: #fff;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+      }
+      .sidebar ul {
+        list-style: decimal;
+      }
+      a{
+        color: inherit;
+      }
+      .main-content{
+        margin-left: 300px;
+        padding: 50px;
+      }
+      .element{
+        margin-top: 50px;
+        padding-top: 50px;
+      }
+      .element pre code {
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        padding: 20px;
+        display: block;
+        overflow-x: auto;
+        transition: .3s ease-in-out;
+      }
+      .element pre code.copied{
+        background-color: rgb(47 106 47);color: #fff;
+      }
+      .element p{
+        margin: 0;
+        color: red;
+      }
+      lxc-copy{
+        position: absolute;
+        top: 30px;
+        right: 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <div class="sidebar">
+        <h3>MENU</h3>
+        <ul>
+          <li>
+            <a href="#size_chart">Size chart</a>
+          </li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <h1>Kalles v4.3.7</h1>
+        <div class="content">
+          <div id="size_chart" class="element">
+            <h2>Size chart</h2>
+            
+            <div class="content">
+              <p>sections/main-product.liquid</p>
+              <div class="wrapper" style="position: relative;">
+                <lxc-copy aria-label="Copy">
+                  <svg width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z"></path></svg>
+                </lxc-copy>
+                <pre>
+                  <code>
+{%- when 'size_delivery_ask' -%}
+  &lt;div class=&quot;t4s-extra-link&quot; {{ block.shopify_attributes }}&gt;
+    {% liquid
+      assign bk_size_chart  =  block.settings.size_chart
+      assign pos_sizeg      = block.settings.pos_sizeg
+      assign bk_stts__sizeg = block.settings
+    %}
+    {%- if bk_size_chart != '1' -%}
+      {%- liquid
+        assign ck_s = true
+        assign sc_type = bk_stts__sizeg.sc_type
+        assign page_size = bk_stts__sizeg.page
+        assign image = bk_stts__sizeg.image
+  
+        if bk_size_chart == '2' or pos_sizeg == '2'
+          assign ck_s = false
+          assign size_ck = bk_stts__sizeg.size_ck | append: ',size,sizes,Größe'
+          assign get_size = size_ck | downcase | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq
+          for option in product.options_with_values
+            assign name = option.name | downcase
+            if get_size contains name
+              assign name_sizeg = name
+              assign ck_s = true
+              break
+            endif
+          endfor
+        endif
+      -%}
+  
+      {%- if sc_type == '1' and page_size != blank and ck_s -%}
+        &lt;a class=&quot;t4s-ch t4s-btn__size-chart&quot; data-no-instant rel=&quot;nofollow&quot; href=&quot;{{ page_size.url }}&quot; data-class=&quot;t4s-mfp-btn-close-inline&quot; data-id=&quot;t4s-pr-popup__size-guide&quot; data-storageid=&quot;{{ page_size.url }}&quot; data-open-mfp-ajax data-style=&quot;max-width:950px&quot; data-mfp-src=&quot;{{ page_size.url }}/?section_id=ajax_popup&quot;&gt;{{ 'products.product.product_size_guide' | t }}&lt;/a&gt;
+      {%- elsif sc_type == '2' and image != blank and ck_s -%}
+        &lt;a class=&quot;t4s-ch t4s-btn__size-chart&quot; data-no-instant rel=&quot;nofollow&quot;  href=&quot;{{ product.url }}&quot; data-t4s-image-opend data-pswp-src=&quot;{{ image | image_url }}&quot; data-pswp-w=&quot;{{ image.width }}&quot; data-pswp-h=&quot;{{ image.height }}&quot; data-pswp-class=&quot;pswp__size-guide&quot;&gt;{{ 'products.product.product_size_guide' | t }}&lt;/a&gt;
+  
+      {%- endif -%}
+  
+    {%- endif -%}
+
+    {%- assign page_delivery = bk_stts.page_dr %}{% if bk_stts.delivery and page_delivery != blank -%}
+    &lt;a class=&quot;t4s-ch&quot; data-no-instant rel=&quot;nofollow&quot; href=&quot;{{ page_delivery.url }}&quot; data-class=&quot;t4s-mfp-btn-close-inline&quot; data-id=&quot;t4s-pr-popup__delivery&quot; data-storageid=&quot;{{ page_delivery.url }}&quot; data-open-mfp-ajax data-style=&quot;max-width:950px&quot; data-mfp-src=&quot;{{ page_delivery.url }}/?section_id=ajax_popup&quot;&gt;{{ 'products.product.delivery_return' | t }}&lt;/a&gt;
+    {%- endif -%}
+
+    {%- if bk_stts.ask -%}
+    &lt;a class=&quot;t4s-ch&quot; data-no-instant rel=&quot;nofollow&quot; href=&quot;{{ product.url }}&quot; data-class=&quot;t4s-mfp-btn-close-inline&quot; data-id=&quot;t4s-pr-popup__contact&quot; data-storageid=&quot;contact_product{{ product.id }}&quot; data-open-mfp-ajax data-style=&quot;max-width:570px&quot; data-mfp-src=&quot;{{ product.url }}/?section_id=ajax_popup&quot; data-phone='{{ bk_stts.phone }}'&gt;{{ 'products.product.ask_question' | t }}&lt;/a&gt;
+    {%- endif -%}
+
+  &lt;/div&gt;
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      if(!customElements.get('lxc-copy')){
+        class lxcCopy extends HTMLElement{
+          constructor(){
+            super();
+            this.parent = this.closest('.wrapper');
+            this.code = this.parent.querySelector('code');
+            this.addEventListener('click', this.action);
+          }
+          action(){
+            navigator.clipboard.writeText(this.code.innerText).then(() => {
+              this.code.classList.add('copied');
+              setTimeout(() => {
+                this.code.classList.remove('copied');
+              }, 1000);
+            });
+
+          }
+        }
+        customElements.define('lxc-copy', lxcCopy)
+      }
+    </script>
+  </body>
+</html>
